@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="GlobaMart — The World's Marketplace. Shop millions of products from trusted sellers worldwide."/>
+<title>GlobaMart — The World's Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--surface:#111118;--surface2:#18181f;
+  --border:rgba(255,255,255,0.07);--accent:#ff5c28;--accent2:#ffb347;
+  --gold:#e8c96d;--white:#f2f0eb;--muted:#8a8a9a;
+  --green:#2ecc71;--red:#e74c3c;--blue:#3498db;
+  --shadow:rgba(0,0,0,0.4);--card-bg:#111118;
+  --nav-bg:rgba(10,10,15,0.92);
+}
+[data-theme="light"]{
+  --bg:#f5f4f0;--surface:#ffffff;--surface2:#f0eeea;
+  --border:rgba(0,0,0,0.08);--white:#1a1a24;--muted:#6b6b7a;
+  --shadow:rgba(0,0,0,0.12);--card-bg:#ffffff;
+  --nav-bg:rgba(245,244,240,0.95);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;min-height:100vh;transition:background 0.3s,color 0.3s}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:12px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--white);cursor:pointer;letter-spacing:-0.01em;white-space:nowrap;flex-shrink:0}
+.nav-logo span{color:var(--accent)}
+.nav-center{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.nav-link{padding:7px 13px;font-size:0.78rem;font-family:'Syne',sans-serif;font-weight:600;letter-spacing:0.04em;color:var(--muted);cursor:pointer;border-radius:4px;transition:color 0.2s,background 0.2s;text-transform:uppercase;white-space:nowrap;position:relative}
+.nav-link:hover,.nav-link.active{color:var(--white);background:rgba(255,255,255,0.05)}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-search-wrap{position:relative}
+.nav-search{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;width:220px;transition:border-color 0.2s}
+.nav-search:focus-within{border-color:var(--accent)}
+.nav-search input{background:none;border:none;outline:none;color:var(--white);font-size:0.83rem;font-family:'DM Sans',sans-serif;width:100%}
+.nav-search input::placeholder{color:var(--muted)}
+.nav-icon-btn{width:38px;height:38px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;position:relative;font-size:1rem;color:var(--white)}
+.nav-icon-btn:hover{border-color:var(--accent)}
+.cart-badge{position:absolute;top:-5px;right:-5px;background:var(--accent);color:#fff;font-size:0.58rem;font-weight:800;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.btn{padding:9px 20px;border-radius:6px;font-family:'Syne',sans-serif;font-size:0.77rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#ff7040;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--white)}
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{background:#c0392b}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#27ae60}
+.theme-toggle{font-size:1rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;color:var(--muted)}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+#nav-auth-btn{font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
+.user-menu-wrap{position:relative}
+.user-avatar-btn{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:5px 12px 5px 6px;cursor:pointer;transition:all 0.2s}
+.user-avatar-btn:hover{border-color:var(--accent)}
+.u-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;color:#fff;flex-shrink:0}
+.u-name{font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;color:var(--white);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px;min-width:200px;box-shadow:0 16px 40px var(--shadow);z-index:400}
+.user-menu-wrap:hover .user-dropdown{display:block}
+.ud-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:6px;font-size:0.82rem;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.ud-item:hover{background:rgba(255,92,40,0.08);color:var(--accent)}
+.ud-divider{height:1px;background:var(--border);margin:5px 0}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px}
+.hamburger span{display:block;width:18px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;inset:0;background:var(--bg);z-index:500;flex-direction:column;padding:80px 28px 28px;gap:6px;transform:translateX(100%);transition:transform 0.3s ease}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-link{padding:14px 16px;font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-radius:8px;border-bottom:1px solid var(--border);transition:all 0.2s}
+.mobile-nav-link:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.mobile-nav-close{position:absolute;top:18px;right:20px;font-size:1.4rem;cursor:pointer;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--nav-bg);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 12px}
+.bottom-nav-inner{display:flex;justify-content:space-around;align-items:center}
+.bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:4px 16px;color:var(--muted);transition:color 0.2s;position:relative}
+.bottom-nav-item.active{color:var(--accent)}
+.bottom-nav-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.bottom-nav-label{font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.bnav-badge{position:absolute;top:0;right:10px;background:var(--accent);color:#fff;font-size:0.52rem;font-weight:800;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.page{display:none;min-height:calc(100vh - 64px);padding-top:64px}
+.page.active{display:block}
+.hero{min-height:calc(100vh - 64px);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 70% 50%,rgba(255,92,40,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:60px 48px 60px 60px;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.hero-tag::before{content:'';width:24px;height:2px;background:var(--accent)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,5.2rem);line-height:1.0;font-weight:900;letter-spacing:-0.02em;margin-bottom:18px;color:var(--white)}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:440px;margin-bottom:28px;font-weight:300}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hstat{border-left:2px solid var(--accent);padding-left:12px}
+.hstat-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--white);line-height:1}
+.hstat-lbl{font-size:0.68rem;color:var(--muted);font-family:'Syne',sans-serif;letter-spacing:0.08em;text-transform:uppercase;margin-top:3px}
+.hero-right{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:2px;background:#000;min-height:400px}
+.hero-cell{background:var(--surface2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;font-size:4rem}
+.hero-cell:hover{background:var(--surface)}
+.hero-cell:nth-child(1){grid-row:1/3}
+.hero-badge{position:absolute;top:16px;right:16px;z-index:10;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.1em;padding:5px 10px;border-radius:2px;text-transform:uppercase}
+.ticker{background:var(--accent);padding:9px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:ticker 35s linear infinite;gap:0}
+.ticker-item{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;padding:0 36px}
+.ticker-item::after{content:'✦';margin-left:36px;opacity:0.5}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.section{padding:72px 60px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:16px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:700;line-height:1.1;color:var(--white)}
+.section-title span{color:var(--accent);font-style:italic}
+.see-all{font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;white-space:nowrap}
+.see-all:hover{color:var(--accent);border-color:var(--accent)}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 20px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.cat-card:hover{transform:translateY(-4px);border-color:rgba(255,92,40,0.3);box-shadow:0 12px 28px rgba(255,92,40,0.1)}
+.cat-card:hover::before{transform:scaleX(1)}
+.cat-icon{width:52px;height:52px;border-radius:12px;background:var(--surface2);font-size:1.8rem;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.cat-name{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;margin-bottom:4px;color:var(--white)}
+.cat-count{font-size:0.75rem;color:var(--muted)}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.prod-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.25s;position:relative}
+.prod-card:hover{transform:translateY(-5px);border-color:rgba(255,92,40,0.25);box-shadow:0 18px 44px var(--shadow)}
+.prod-img{height:196px;display:flex;align-items:center;justify-content:center;background:var(--surface2);position:relative;overflow:hidden;font-size:4rem}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease}
+.prod-card:hover .prod-img img{transform:scale(1.06)}
+.prod-badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.07em;padding:3px 7px;border-radius:3px;text-transform:uppercase;z-index:2}
+.prod-badge.new-badge{background:var(--blue)}
+.prod-wish{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;font-size:0.82rem;cursor:pointer;transition:background 0.2s;border:none;z-index:2;color:#fff}
+.prod-wish:hover{background:var(--red)}
+.prod-body{padding:14px}
+.prod-cat{font-size:0.68rem;font-family:'Syne',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.prod-name{font-size:0.87rem;font-weight:500;line-height:1.3;margin-bottom:6px;color:var(--white)}
+.prod-seller{font-size:0.72rem;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.prod-stars{font-size:0.68rem;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.prod-stars span{color:var(--muted);font-size:0.65rem}
+.prod-bottom{display:flex;align-items:center;justify-content:space-between}
+.prod-price{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--white)}
+.prod-price .orig{font-size:0.78rem;color:var(--muted);text-decoration:line-through;margin-left:5px;font-family:'DM Sans',sans-serif;font-weight:300}
+.prod-cart-btn{width:32px;height:32px;border-radius:6px;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.88rem;color:#fff;transition:all 0.2s}
+.prod-cart-btn:hover{background:#ff7040;transform:scale(1.1)}
+.verified-badge{background:rgba(46,204,113,0.15);color:#2ecc71;font-size:0.6rem;padding:2px 6px;border-radius:4px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.05em;display:inline-flex;align-items:center;gap:3px}
+.empty-state{text-align:center;padding:80px 20px;color:var(--muted)}
+.empty-state .es-icon{font-size:3rem;margin-bottom:16px;display:block}
+.empty-state h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px;color:var(--white)}
+.promo-banner{margin:0 60px 72px;background:linear-gradient(135deg,var(--accent) 0%,#c73200 100%);border-radius:16px;padding:44px 52px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;position:relative;overflow:hidden}
+.promo-banner::before{content:'🌍';position:absolute;right:160px;top:50%;transform:translateY(-50%);font-size:7rem;opacity:0.1}
+.promo-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px}
+.promo-sub{font-size:0.95rem;color:rgba(255,255,255,0.82);line-height:1.5}
+.btn-white{background:#fff;color:var(--accent);font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:13px 26px;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;transition:all 0.2s}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.28)}
+.trust-section{padding:72px 60px;background:var(--surface)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.trust-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:26px;text-align:center;transition:border-color 0.2s}
+.trust-card:hover{border-color:rgba(46,204,113,0.3)}
+.trust-card-icon{font-size:2.2rem;margin-bottom:12px;display:block}
+.trust-card-name{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;margin-bottom:5px;color:var(--white)}
+.trust-card-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:60px 60px 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;margin-bottom:14px}
+.footer-brand span{color:var(--accent)}
+.footer-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.footer-link{font-size:0.82rem;color:var(--muted);cursor:pointer;margin-bottom:8px;display:block;transition:color 0.2s}
+.footer-link:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--muted);flex-wrap:wrap;gap:8px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:440px;position:relative;animation:modalIn 0.28s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.94) translateY(20px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--muted);transition:all 0.2s}
+.modal-close:hover{color:var(--white)}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:6px;color:var(--white)}
+.modal-sub{font-size:0.83rem;color:var(--muted);margin-bottom:28px}
+.modal-tabs{display:flex;gap:4px;background:var(--surface2);border-radius:8px;padding:4px;margin-bottom:28px}
+.modal-tab{flex:1;padding:8px;text-align:center;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-radius:6px;transition:all 0.2s}
+.modal-tab.active{background:var(--accent);color:#fff}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--white);font-family:'DM Sans',sans-serif;transition:border-color 0.2s;outline:none}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--muted)}
+.form-error{font-size:0.75rem;color:var(--red);margin-top:6px;display:none}
+.form-error.show{display:block}
+.auth-form{display:none}
+.auth-form.active{display:block}
+.seller-modal{max-width:560px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.upload-zone{border:2px dashed var(--border);border-radius:8px;padding:24px;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative}
+.upload-zone:hover{border-color:var(--accent)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-zone-icon{font-size:1.8rem;margin-bottom:8px}
+.upload-zone p{font-size:0.8rem;color:var(--muted)}
+.upload-zone .uz-main{font-size:0.85rem;color:var(--white);margin-bottom:3px}
+.dashboard{padding:40px 60px;padding-top:104px}
+.dash-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;gap:16px;flex-wrap:wrap}
+.dash-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.dash-sub{font-size:0.85rem;color:var(--muted)}
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px}
+.dash-stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px}
+.ds-label{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.ds-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.dash-panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.dash-panel-title{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.prod-table{width:100%;border-collapse:collapse}
+.prod-table th{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}
+.prod-table td{padding:12px 12px;font-size:0.82rem;color:var(--white);border-bottom:1px solid var(--border)}
+.prod-table tr:last-child td{border-bottom:none}
+.prod-table tr:hover td{background:rgba(255,255,255,0.02)}
+.status-badge{font-size:0.65rem;padding:3px 8px;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;text-transform:uppercase}
+.status-active{background:rgba(46,204,113,0.15);color:var(--green)}
+.status-pending{background:rgba(255,179,71,0.15);color:var(--accent2)}
+.status-rejected{background:rgba(231,76,60,0.15);color:var(--red)}
+.status-approved{background:rgba(46,204,113,0.15);color:var(--green)}
+.prod-thumb{width:36px;height:36px;border-radius:6px;background:var(--surface2);font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+.add-product-form{max-width:720px;margin:0 auto}
+.form-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px}
+.form-section-title{font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;cursor:pointer}
+.form-select:focus{border-color:var(--accent)}
+.form-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;resize:vertical;min-height:100px}
+.form-textarea:focus{border-color:var(--accent)}
+.image-preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.img-preview{aspect-ratio:1;border-radius:8px;object-fit:cover;border:1px solid var(--border)}
+.admin-panel{padding:40px 60px;padding-top:104px}
+.admin-tabs{display:flex;gap:4px;background:var(--surface2);border-radius:8px;padding:4px;margin-bottom:28px;max-width:400px}
+.admin-tab{flex:1;padding:8px;text-align:center;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-radius:6px;transition:all 0.2s}
+.admin-tab.active{background:var(--accent);color:#fff}
+.admin-content{display:none}
+.admin-content.active{display:block}
+.application-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
+.app-info h3{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.app-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:0.78rem;color:var(--muted);margin-bottom:10px}
+.app-meta span{display:flex;align-items:center;gap:4px}
+.app-id-card{width:80px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--border);cursor:pointer}
+.app-actions{display:flex;gap:8px;flex-direction:column}
+.reject-reason{width:100%;margin-top:8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:0.8rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;resize:none;min-height:60px;display:none}
+.reject-reason.show{display:block}
+.shop-page{padding:40px 60px;padding-top:104px}
+.shop-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.shop-filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:7px 14px;border-radius:20px;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--muted);transition:all 0.2s}
+.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sort-select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.8rem;color:var(--muted);font-family:'Syne',sans-serif;outline:none;cursor:pointer}
+.product-detail{padding:40px 60px;padding-top:104px;max-width:1200px}
+.pd-back{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;margin-bottom:28px;transition:color 0.2s}
+.pd-back:hover{color:var(--accent)}
+.pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:60px}
+.pd-main-img{width:100%;aspect-ratio:1;border-radius:12px;background:var(--surface2);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:6rem;margin-bottom:12px}
+.pd-main-img img{width:100%;height:100%;object-fit:cover}
+.pd-thumbnails{display:flex;gap:8px}
+.pd-thumb{width:60px;height:60px;border-radius:8px;background:var(--surface2);cursor:pointer;border:2px solid transparent;overflow:hidden;transition:border-color 0.2s;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.pd-thumb.active{border-color:var(--accent)}
+.pd-thumb img{width:100%;height:100%;object-fit:cover}
+.pd-cat-tag{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.pd-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:12px}
+.pd-seller-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:0.82rem;color:var(--muted)}
+.pd-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.pd-price{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--white)}
+.pd-orig{font-size:1rem;color:var(--muted);text-decoration:line-through}
+.pd-discount{background:rgba(231,76,60,0.15);color:var(--red);font-size:0.78rem;padding:3px 8px;border-radius:4px;font-weight:700;font-family:'Syne',sans-serif}
+.pd-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.pd-qty{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.qty-label{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.qty-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.qty-btn{width:36px;height:36px;background:var(--surface2);border:none;cursor:pointer;font-size:1.1rem;color:var(--white);transition:background 0.2s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:var(--accent)}
+.qty-val{padding:0 16px;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--white);min-width:40px;text-align:center}
+.pd-actions{display:flex;gap:10px;flex-wrap:wrap}
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;font-size:0.84rem;color:var(--white);box-shadow:0 8px 28px var(--shadow);animation:toastIn 0.3s ease;pointer-events:auto;max-width:320px}
+.toast.removing{animation:toastOut 0.3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(110%)}}
+.toast-icon{font-size:1.1rem;flex-shrink:0}
+.toast-success{border-left:3px solid var(--green)}
+.toast-error{border-left:3px solid var(--red)}
+.toast-info{border-left:3px solid var(--blue)}
+.toast-warning{border-left:3px solid var(--accent2)}
+.loading-spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.page-loader{display:flex;align-items:center;justify-content:center;min-height:300px}
+.page-loader .loading-spinner{width:36px;height:36px;border-width:3px}
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}.products-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}.dash-stats{grid-template-columns:repeat(2,1fr)}
+  .dash-grid{grid-template-columns:1fr}.pd-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media(max-width:768px){
+  nav{padding:0 18px}.nav-center,.nav-search-wrap{display:none}.hamburger{display:flex}
+  .mobile-nav{display:flex}.bottom-nav{display:block}.section{padding:48px 20px}
+  .promo-banner{margin:0 20px 48px;padding:28px;grid-template-columns:1fr}
+  body{padding-bottom:80px}.hero-left{padding:40px 20px}
+  .dashboard,.admin-panel,.shop-page,.product-detail{padding:20px;padding-top:84px}
+  .promo-banner::before{display:none}.footer-grid{grid-template-columns:1fr}
+  footer{padding:40px 20px 100px}.modal{padding:24px;margin:16px}.form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Globa<span>Mart</span></div>
+  <div class="nav-center">
+    <div class="nav-link active" onclick="showPage('home')">Home</div>
+    <div class="nav-link" onclick="showPage('shop')">Shop</div>
+    <div class="nav-link" onclick="showPage('sellers')">Sellers</div>
+    <div class="nav-link" id="nav-dashboard-link" style="display:none" onclick="showPage('dashboard')">Dashboard</div>
+    <div class="nav-link" id="nav-admin-link" style="display:none" onclick="showPage('admin')">Admin</div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <div class="nav-search">
+        <span>🔍</span>
+        <input id="search-input" type="text" placeholder="Search products…" onkeyup="handleSearch(event)"/>
+      </div>
+    </div>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</div>
+    <div class="nav-icon-btn" onclick="showCart()" title="Cart">🛒
+      <div class="cart-badge" id="cart-badge">0</div>
+    </div>
+    <button class="btn btn-accent" id="nav-auth-btn" onclick="openAuthModal()">Sign In</button>
+    <div class="user-menu-wrap" id="user-menu" style="display:none">
+      <div class="user-avatar-btn">
+        <div class="u-avatar" id="nav-avatar">?</div>
+        <span class="u-name" id="nav-username">User</span>
+      </div>
+      <div class="user-dropdown">
+        <div class="ud-item" onclick="showPage('profile')">👤 My Profile</div>
+        <div class="ud-item" onclick="showPage('orders')">📦 My Orders</div>
+        <div class="ud-item" onclick="showPage('wishlist')">❤️ Wishlist</div>
+        <div id="ud-seller-item" style="display:none" class="ud-item" onclick="showPage('dashboard')">📊 Seller Dashboard</div>
+        <div id="ud-admin-item" style="display:none" class="ud-item" onclick="showPage('admin')">🛡️ Admin Panel</div>
+        <div class="ud-divider"></div>
+        <div class="ud-item" onclick="openSellerModal()" id="ud-become-seller">🏪 Become a Seller</div>
+        <div class="ud-divider"></div>
+        <div class="ud-item" style="color:var(--red)" onclick="logout()">🚪 Sign Out</div>
+      </div>
+    </div>
+    <div class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-close" onclick="toggleMobileNav()">✕</div>
+  <div class="mobile-nav-link" onclick="showPage('home');toggleMobileNav()">Home</div>
+  <div class="mobile-nav-link" onclick="showPage('shop');toggleMobileNav()">Shop</div>
+  <div class="mobile-nav-link" onclick="showPage('sellers');toggleMobileNav()">Sellers</div>
+  <div class="mobile-nav-link" onclick="openAuthModal();toggleMobileNav()">Sign In</div>
+</div>
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <div class="bottom-nav-item active" onclick="showPage('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="bottom-nav-label">Home</span>
+    </div>
+    <div class="bottom-nav-item" onclick="showPage('shop')">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="bottom-nav-label">Shop</span>
+    </div>
+    <div class="bottom-nav-item" onclick="showCart()">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg>
+      <span class="bottom-nav-label">Cart</span>
+      <div class="bnav-badge" id="bottom-cart-badge">0</div>
+    </div>
+    <div class="bottom-nav-item" onclick="currentUser?showPage('profile'):openAuthModal()">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="bottom-nav-label">Account</span>
+    </div>
+  </div>
+</div>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">New Season Arrivals</div>
+      <h1>Shop the<br>World's<br><em>Best</em> Products</h1>
+      <p class="hero-sub">Millions of products from verified sellers worldwide. Secure payments, fast shipping, and buyer protection on every order.</p>
+      <div class="hero-actions">
+        <button class="btn btn-accent" onclick="showPage('shop')">🛍️ Shop Now</button>
+        <button class="btn btn-outline" onclick="openSellerModal()">🏪 Become a Seller</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-num">12M+</div><div class="hstat-lbl">Products</div></div>
+        <div class="hstat"><div class="hstat-num">3.8M+</div><div class="hstat-lbl">Sellers</div></div>
+        <div class="hstat"><div class="hstat-num">190+</div><div class="hstat-lbl">Countries</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-cell" onclick="showPage('shop')"><span>👗</span><div class="hero-badge">NEW</div></div>
+      <div class="hero-cell" onclick="showPage('shop')"><span>💻</span></div>
+      <div class="hero-cell" onclick="showPage('shop')"><span>🎮</span></div>
+      <div class="hero-cell" onclick="showPage('shop')"><span>🏠</span></div>
+      <div class="hero-cell" onclick="showPage('shop')"><span>💄</span></div>
+    </div>
+  </section>
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">Free Shipping on orders over $50</span>
+      <span class="ticker-item">Verified Sellers Only</span>
+      <span class="ticker-item">Buyer Protection on Every Order</span>
+      <span class="ticker-item">24/7 Customer Support</span>
+      <span class="ticker-item">30-Day Easy Returns</span>
+      <span class="ticker-item">Secure Payments</span>
+      <span class="ticker-item">Free Shipping on orders over $50</span>
+      <span class="ticker-item">Verified Sellers Only</span>
+      <span class="ticker-item">Buyer Protection on Every Order</span>
+      <span class="ticker-item">24/7 Customer Support</span>
+      <span class="ticker-item">30-Day Easy Returns</span>
+      <span class="ticker-item">Secure Payments</span>
+    </div>
+  </div>
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Shop by <span>Category</span></h2>
+      <span class="see-all" onclick="showPage('shop')">View All →</span>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filterCategory('Electronics')"><div class="cat-icon">💻</div><div class="cat-name">Electronics</div><div class="cat-count">2.4M products</div></div>
+      <div class="cat-card" onclick="filterCategory('Fashion')"><div class="cat-icon">👗</div><div class="cat-name">Fashion</div><div class="cat-count">5.1M products</div></div>
+      <div class="cat-card" onclick="filterCategory('Home')"><div class="cat-icon">🏠</div><div class="cat-name">Home & Living</div><div class="cat-count">1.8M products</div></div>
+      <div class="cat-card" onclick="filterCategory('Beauty')"><div class="cat-icon">💄</div><div class="cat-name">Beauty</div><div class="cat-count">890K products</div></div>
+      <div class="cat-card" onclick="filterCategory('Sports')"><div class="cat-icon">⚽</div><div class="cat-name">Sports</div><div class="cat-count">1.2M products</div></div>
+      <div class="cat-card" onclick="filterCategory('Books')"><div class="cat-icon">📚</div><div class="cat-name">Books</div><div class="cat-count">4.3M products</div></div>
+      <div class="cat-card" onclick="filterCategory('Gaming')"><div class="cat-icon">🎮</div><div class="cat-name">Gaming</div><div class="cat-count">560K products</div></div>
+      <div class="cat-card" onclick="filterCategory('Toys')"><div class="cat-icon">🧸</div><div class="cat-name">Toys & Kids</div><div class="cat-count">720K products</div></div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="section-head">
+      <h2 class="section-title">Featured <span>Products</span></h2>
+      <span class="see-all" onclick="showPage('shop')">View All →</span>
+    </div>
+    <div class="products-grid" id="home-products-grid">
+      <div class="page-loader"><div class="loading-spinner"></div></div>
+    </div>
+  </section>
+  <div class="promo-banner">
+    <div>
+      <div class="promo-title">Sell to Millions of Customers Worldwide</div>
+      <div class="promo-sub">Join 3.8 million verified sellers. Set up your shop in minutes with our powerful seller tools.</div>
+    </div>
+    <button class="btn-white" onclick="openSellerModal()">Start Selling</button>
+  </div>
+  <div class="trust-section">
+    <div class="section-head"><h2 class="section-title">Why <span>GlobaMart?</span></h2></div>
+    <div class="trust-grid">
+      <div class="trust-card"><span class="trust-card-icon">🛡️</span><div class="trust-card-name">Buyer Protection</div><div class="trust-card-desc">Every purchase is protected. Get a full refund if your item doesn't arrive or isn't as described.</div></div>
+      <div class="trust-card"><span class="trust-card-icon">✅</span><div class="trust-card-name">Verified Sellers</div><div class="trust-card-desc">All sellers are identity-verified and reviewed before they can list products on our platform.</div></div>
+      <div class="trust-card"><span class="trust-card-icon">🚀</span><div class="trust-card-name">Fast Shipping</div><div class="trust-card-desc">Free shipping on orders over $50. Express delivery available in 190+ countries worldwide.</div></div>
+      <div class="trust-card"><span class="trust-card-icon">🔒</span><div class="trust-card-name">Secure Payments</div><div class="trust-card-desc">Bank-level SSL encryption. Pay with card, PayPal, or 20+ local payment methods.</div></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Globa<span>Mart</span></div>
+        <p class="footer-desc">The world's marketplace. Shop millions of products from verified sellers across 190+ countries.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a class="footer-link" onclick="filterCategory('Electronics')">Electronics</a>
+        <a class="footer-link" onclick="filterCategory('Fashion')">Fashion</a>
+        <a class="footer-link" onclick="filterCategory('Home')">Home & Living</a>
+        <a class="footer-link" onclick="filterCategory('Beauty')">Beauty</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sellers</h4>
+        <a class="footer-link" onclick="openSellerModal()">Start Selling</a>
+        <a class="footer-link" onclick="showPage('sellers')">Seller Directory</a>
+        <a class="footer-link">Seller Guide</a>
+        <a class="footer-link">Fees & Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a class="footer-link">Help Center</a>
+        <a class="footer-link">Buyer Protection</a>
+        <a class="footer-link">Returns</a>
+        <a class="footer-link">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 GlobaMart. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Service · Cookie Policy</span>
+    </div>
+  </footer>
+</div>
+
+<!-- SHOP PAGE -->
+<div class="page" id="page-shop">
+  <div class="shop-page">
+    <div class="section-head" style="margin-bottom:20px"><h1 class="section-title">All <span>Products</span></h1></div>
+    <div class="shop-toolbar">
+      <div class="shop-filters" id="shop-filters">
+        <div class="filter-btn active" onclick="setShopFilter(null,this)">All</div>
+        <div class="filter-btn" onclick="setShopFilter('Electronics',this)">Electronics</div>
+        <div class="filter-btn" onclick="setShopFilter('Fashion',this)">Fashion</div>
+        <div class="filter-btn" onclick="setShopFilter('Home',this)">Home</div>
+        <div class="filter-btn" onclick="setShopFilter('Beauty',this)">Beauty</div>
+        <div class="filter-btn" onclick="setShopFilter('Sports',this)">Sports</div>
+        <div class="filter-btn" onclick="setShopFilter('Gaming',this)">Gaming</div>
+      </div>
+      <select class="sort-select" onchange="sortShopProducts(this.value)">
+        <option value="newest">Newest First</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+    <div class="products-grid" id="shop-products-grid"><div class="page-loader"><div class="loading-spinner"></div></div></div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="page" id="page-product">
+  <div class="product-detail" id="product-detail-content"><div class="page-loader"><div class="loading-spinner"></div></div></div>
+</div>
+
+<!-- SELLERS PAGE -->
+<div class="page" id="page-sellers">
+  <div class="shop-page">
+    <div class="section-head" style="margin-bottom:32px">
+      <h1 class="section-title">Verified <span>Sellers</span></h1>
+      <button class="btn btn-accent" onclick="openSellerModal()">🏪 Become a Seller</button>
+    </div>
+    <div id="sellers-list"><div class="page-loader"><div class="loading-spinner"></div></div></div>
+  </div>
+</div>
+
+<!-- SELLER DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="dashboard">
+    <div class="dash-header">
+      <div><h1 class="dash-title">Seller Dashboard</h1><p class="dash-sub">Manage your products and track performance</p></div>
+      <button class="btn btn-accent" onclick="showPage('add-product')">+ Add Product</button>
+    </div>
+    <div class="dash-stats">
+      <div class="dash-stat"><div class="ds-label">Total Products</div><div class="ds-val" id="stat-products">—</div></div>
+      <div class="dash-stat"><div class="ds-label">Total Sales</div><div class="ds-val" id="stat-sales">—</div></div>
+      <div class="dash-stat"><div class="ds-label">Revenue</div><div class="ds-val" id="stat-revenue">—</div></div>
+      <div class="dash-stat"><div class="ds-label">Rating</div><div class="ds-val" id="stat-rating">—</div></div>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-panel">
+        <div class="dash-panel-title">My Products <button class="btn btn-accent" style="padding:6px 14px;font-size:0.7rem" onclick="showPage('add-product')">+ Add</button></div>
+        <div id="my-products-table"><div class="page-loader"><div class="loading-spinner"></div></div></div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-title">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="btn btn-accent" style="width:100%;justify-content:center" onclick="showPage('add-product')">📦 Add New Product</button>
+          <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="showPage('shop')">🛍️ View My Store</button>
+          <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="showPage('orders')">📋 View Orders</button>
+        </div>
+        <div style="margin-top:24px">
+          <div class="dash-panel-title" style="margin-bottom:12px">Account Status</div>
+          <div style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:8px">
+            <span style="font-size:1.4rem">✅</span>
+            <div><div style="font-size:0.82rem;font-weight:600;color:var(--green)">Verified Seller</div><div style="font-size:0.72rem;color:var(--muted)">Your account is verified</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PRODUCT -->
+<div class="page" id="page-add-product">
+  <div class="dashboard">
+    <div class="dash-header">
+      <div><h1 class="dash-title">Add New Product</h1><p class="dash-sub">List a new product for sale</p></div>
+      <button class="btn btn-outline" onclick="showPage('dashboard')">← Back</button>
+    </div>
+    <div class="add-product-form">
+      <div class="form-section">
+        <div class="form-section-title">Basic Information</div>
+        <div class="form-group"><label class="form-label">Product Name *</label><input class="form-input" id="prod-name" type="text" placeholder="e.g. Wireless Headphones"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Category *</label>
+            <select class="form-select" id="prod-category">
+              <option value="">Select category…</option>
+              <option>Electronics</option><option>Fashion</option><option>Home</option>
+              <option>Beauty</option><option>Sports</option><option>Books</option>
+              <option>Gaming</option><option>Toys</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Stock Quantity *</label><input class="form-input" id="prod-stock" type="number" min="0" placeholder="50"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Description *</label><textarea class="form-textarea" id="prod-desc" placeholder="Describe your product…"></textarea></div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Pricing</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Selling Price (USD) *</label><input class="form-input" id="prod-price" type="number" min="0" step="0.01" placeholder="29.99"></div>
+          <div class="form-group"><label class="form-label">Original Price (optional)</label><input class="form-input" id="prod-orig-price" type="number" min="0" step="0.01" placeholder="49.99"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Product Images</div>
+        <div class="upload-zone">
+          <input type="file" id="prod-images" accept="image/*" multiple onchange="previewProductImages(this)">
+          <div class="upload-zone-icon">📷</div>
+          <p class="uz-main">Click to upload product images</p>
+          <p>Up to 5 images · JPG, PNG, WebP · Max 5MB each</p>
+        </div>
+        <div class="image-preview-grid" id="image-preview-grid"></div>
+      </div>
+      <button class="btn btn-accent" style="width:100%;justify-content:center;padding:14px" onclick="submitProduct()" id="submit-prod-btn">📦 List Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="page" id="page-admin">
+  <div class="admin-panel">
+    <div class="dash-header"><div><h1 class="dash-title">Admin Panel</h1><p class="dash-sub">Manage seller applications and platform</p></div></div>
+    <div class="admin-tabs">
+      <div class="admin-tab active" onclick="switchAdminTab('applications',this)">Applications</div>
+      <div class="admin-tab" onclick="switchAdminTab('users',this)">Users</div>
+      <div class="admin-tab" onclick="switchAdminTab('products',this)">Products</div>
+    </div>
+    <div class="admin-content active" id="admin-applications"><div id="applications-list"><div class="page-loader"><div class="loading-spinner"></div></div></div></div>
+    <div class="admin-content" id="admin-users"><div id="users-list"><div class="page-loader"><div class="loading-spinner"></div></div></div></div>
+    <div class="admin-content" id="admin-products"><div id="admin-products-list"><div class="page-loader"><div class="loading-spinner"></div></div></div></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div class="dashboard">
+    <h1 class="dash-title" style="margin-bottom:28px">My Profile</h1>
+    <div style="max-width:560px">
+      <div class="form-section">
+        <div class="form-section-title">Personal Information</div>
+        <div class="form-group"><label class="form-label">Display Name</label><input class="form-input" id="profile-name" type="text"></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="profile-email" type="email" disabled style="opacity:0.5"></div>
+        <div class="form-group"><label class="form-label">Account Role</label><input class="form-input" id="profile-role" type="text" disabled style="opacity:0.5"></div>
+        <button class="btn btn-accent" onclick="updateProfile()">💾 Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS -->
+<div class="page" id="page-orders">
+  <div class="dashboard">
+    <h1 class="dash-title" style="margin-bottom:28px">My Orders</h1>
+    <div class="empty-state"><span class="es-icon">📦</span><h3>No orders yet</h3><p>Your orders will appear here once you make a purchase.</p><br><button class="btn btn-accent" onclick="showPage('shop')">Start Shopping</button></div>
+  </div>
+</div>
+
+<!-- WISHLIST -->
+<div class="page" id="page-wishlist">
+  <div class="dashboard">
+    <h1 class="dash-title" style="margin-bottom:28px">My Wishlist</h1>
+    <div class="empty-state"><span class="es-icon">❤️</span><h3>Your wishlist is empty</h3><p>Save products you love to your wishlist.</p><br><button class="btn btn-accent" onclick="showPage('shop')">Discover Products</button></div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <div class="modal-close" onclick="closeAuthModal()">✕</div>
+    <div class="modal-title">Welcome to GlobaMart</div>
+    <p class="modal-sub">Sign in to shop, sell, and manage your account.</p>
+    <div class="modal-tabs">
+      <div class="modal-tab active" onclick="switchAuthTab('login')">Sign In</div>
+      <div class="modal-tab" onclick="switchAuthTab('register')">Register</div>
+    </div>
+    <div class="auth-form active" id="login-form">
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="login-email" type="email" placeholder="you@email.com" autocomplete="email"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="login-password" type="password" placeholder="••••••••" onkeyup="if(event.key==='Enter')loginSubmit()"></div>
+      <div class="form-error" id="login-error"></div>
+      <button class="btn btn-accent" style="width:100%;justify-content:center;margin-top:6px" onclick="loginSubmit()" id="login-btn">Sign In</button>
+    </div>
+    <div class="auth-form" id="register-form">
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="reg-name" type="text" placeholder="Jane Smith"></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="reg-email" type="email" placeholder="you@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="reg-password" type="password" placeholder="Min 6 characters" onkeyup="if(event.key==='Enter')registerSubmit()"></div>
+      <div class="form-error" id="reg-error"></div>
+      <button class="btn btn-accent" style="width:100%;justify-content:center;margin-top:6px" onclick="registerSubmit()" id="reg-btn">Create Account</button>
+      <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:14px">By registering you agree to our <u style="cursor:pointer">Terms of Service</u>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SELLER MODAL -->
+<div class="modal-overlay" id="seller-modal">
+  <div class="modal seller-modal" style="overflow-y:auto;max-height:90vh">
+    <div class="modal-close" onclick="closeSellerModal()">✕</div>
+    <div class="modal-title">Become a Seller</div>
+    <p class="modal-sub">Apply for a verified seller account on GlobaMart.</p>
+    <div id="seller-not-auth" style="display:none;text-align:center;padding:20px 0">
+      <span style="font-size:2.5rem;display:block;margin-bottom:14px">🔐</span>
+      <p style="color:var(--muted);margin-bottom:18px">You need to be signed in to apply as a seller.</p>
+      <button class="btn btn-accent" onclick="closeSellerModal();openAuthModal()">Sign In First</button>
+    </div>
+    <div id="seller-already-applied" style="display:none;text-align:center;padding:20px 0">
+      <span style="font-size:2.5rem;display:block;margin-bottom:14px" id="app-status-icon">⏳</span>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px;color:var(--white)" id="app-status-title">Application Pending</h3>
+      <p style="color:var(--muted);font-size:0.85rem" id="app-status-msg">Your application is under review.</p>
+    </div>
+    <div id="seller-is-seller" style="display:none;text-align:center;padding:20px 0">
+      <span style="font-size:2.5rem;display:block;margin-bottom:14px">✅</span>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px;color:var(--white)">You're a Verified Seller!</h3>
+      <p style="color:var(--muted);font-size:0.85rem;margin-bottom:18px">Start listing products from your dashboard.</p>
+      <button class="btn btn-accent" onclick="closeSellerModal();showPage('dashboard')">Go to Dashboard</button>
+    </div>
+    <div id="seller-form">
+      <div class="form-group"><label class="form-label">Business Name *</label><input class="form-input" id="seller-business-name" type="text" placeholder="Your Store / Business Name"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Business Type *</label>
+          <select class="form-select" id="seller-business-type">
+            <option value="">Select…</option>
+            <option>Individual / Freelancer</option><option>Sole Proprietorship</option>
+            <option>LLC / Partnership</option><option>Corporation</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" id="seller-phone" type="tel" placeholder="+1 555 000 0000"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Business Address *</label><input class="form-input" id="seller-address" type="text" placeholder="123 Main St, City, Country"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Bank Name *</label><input class="form-input" id="seller-bank-name" type="text" placeholder="Chase, HSBC, etc."></div>
+        <div class="form-group"><label class="form-label">Account Number *</label><input class="form-input" id="seller-bank-account" type="text" placeholder="••••••••••••"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ID / Business Document</label>
+        <div class="upload-zone">
+          <input type="file" id="seller-id-card" accept="image/*,.pdf">
+          <div class="upload-zone-icon">📄</div>
+          <p class="uz-main">Click to upload ID or business license</p>
+          <p>JPG, PNG, PDF · Max 10MB</p>
+        </div>
+      </div>
+      <div class="form-error" id="seller-error"></div>
+      <button class="btn btn-accent" style="width:100%;justify-content:center;margin-top:4px" onclick="submitSellerApp()" id="seller-submit-btn">🚀 Submit Application</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<!-- FIREBASE + APP -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile as fbUpdateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, collection, query, where, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+const app = initializeApp({
+  apiKey:"AIzaSyD70wcXxNNRqW8a-4t1kY70lMfRWeGnAfE",
+  authDomain:"globamart-389aa.firebaseapp.com",
+  projectId:"globamart-389aa",
+  storageBucket:"globamart-389aa.firebasestorage.app",
+  messagingSenderId:"231548981743",
+  appId:"1:231548981743:web:54c0aca72902b15ce3261a"
+});
+const auth=getAuth(app), db=getFirestore(app), storage=getStorage(app);
+let currentUser=null, currentUserData=null;
+let cartItems=JSON.parse(localStorage.getItem('gm_cart')||'[]');
+let allProducts=[], shopProducts=[], shopCurrentCategory=null, shopCurrentSort='newest';
+
+onAuthStateChanged(auth, async(user)=>{
+  if(user){currentUser=user;const s=await getDoc(doc(db,"users",user.uid));currentUserData=s.exists()?{uid:user.uid,...s.data()}:null;}
+  else{currentUser=null;currentUserData=null;}
+  updateNavUI();updateCartBadge();
+});
+
+function updateNavUI(){
+  const authBtn=document.getElementById('nav-auth-btn'),userMenu=document.getElementById('user-menu');
+  const dashLink=document.getElementById('nav-dashboard-link'),adminLink=document.getElementById('nav-admin-link');
+  if(currentUser&&currentUserData){
+    authBtn.style.display='none';userMenu.style.display='flex';
+    document.getElementById('nav-username').textContent=currentUserData.name||'User';
+    document.getElementById('nav-avatar').textContent=(currentUserData.name||'U')[0].toUpperCase();
+    const isSeller=currentUserData.isVerifiedSeller,isAdmin=currentUserData.role==='admin';
+    dashLink.style.display=(isSeller||isAdmin)?'block':'none';
+    adminLink.style.display=isAdmin?'block':'none';
+    document.getElementById('ud-seller-item').style.display=isSeller?'flex':'none';
+    document.getElementById('ud-admin-item').style.display=isAdmin?'flex':'none';
+    document.getElementById('ud-become-seller').style.display=isSeller?'none':'flex';
+    document.getElementById('profile-name').value=currentUserData.name||'';
+    document.getElementById('profile-email').value=currentUser.email||'';
+    document.getElementById('profile-role').value=(currentUserData.role||'customer')+(isSeller?' (Verified Seller ✅)':'');
+  } else {
+    authBtn.style.display='flex';userMenu.style.display='none';
+    dashLink.style.display='none';adminLink.style.display='none';
+  }
+}
+
+window.loginSubmit=async function(){
+  const email=document.getElementById('login-email').value.trim(),pass=document.getElementById('login-password').value;
+  const errEl=document.getElementById('login-error'),btn=document.getElementById('login-btn');
+  errEl.classList.remove('show');
+  if(!email||!pass){showErr(errEl,'Please fill in all fields.');return;}
+  btn.innerHTML='<div class="loading-spinner"></div>';btn.disabled=true;
+  try{await signInWithEmailAndPassword(auth,email,pass);closeAuthModal();showToast('Welcome back! 👋','success');}
+  catch(e){showErr(errEl,authMsg(e.code));}
+  finally{btn.innerHTML='Sign In';btn.disabled=false;}
+};
+
+window.registerSubmit=async function(){
+  const name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),pass=document.getElementById('reg-password').value;
+  const errEl=document.getElementById('reg-error'),btn=document.getElementById('reg-btn');
+  errEl.classList.remove('show');
+  if(!name||!email||!pass){showErr(errEl,'Please fill in all fields.');return;}
+  if(pass.length<6){showErr(errEl,'Password must be at least 6 characters.');return;}
+  btn.innerHTML='<div class="loading-spinner"></div>';btn.disabled=true;
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    await fbUpdateProfile(cred.user,{displayName:name});
+    await setDoc(doc(db,"users",cred.user.uid),{name,email,role:"customer",isVerifiedSeller:false,createdAt:serverTimestamp(),photoURL:""});
+    closeAuthModal();showToast('Account created! Welcome 🎉','success');
+  }catch(e){showErr(errEl,authMsg(e.code));}
+  finally{btn.innerHTML='Create Account';btn.disabled=false;}
+};
+
+window.logout=async function(){await signOut(auth);showPage('home');showToast('Signed out. See you soon!','info');};
+
+window.updateProfile=async function(){
+  if(!currentUser)return;
+  const name=document.getElementById('profile-name').value.trim();
+  if(!name){showToast('Name cannot be empty.','error');return;}
+  try{
+    await updateDoc(doc(db,"users",currentUser.uid),{name});
+    await fbUpdateProfile(currentUser,{displayName:name});
+    if(currentUserData)currentUserData.name=name;
+    document.getElementById('nav-username').textContent=name;
+    document.getElementById('nav-avatar').textContent=name[0].toUpperCase();
+    showToast('Profile updated! ✅','success');
+  }catch(e){showToast('Failed to update profile.','error');}
+};
+
+function authMsg(code){
+  const m={'auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already in use.','auth/invalid-email':'Invalid email.','auth/weak-password':'Min 6 characters.','auth/too-many-requests':'Too many attempts.','auth/invalid-credential':'Invalid email or password.'};
+  return m[code]||'Something went wrong.';
+}
+
+window.openSellerModal=async function(){
+  const modal=document.getElementById('seller-modal');
+  ['seller-not-auth','seller-already-applied','seller-is-seller','seller-form'].forEach(id=>document.getElementById(id).style.display='none');
+  if(!currentUser){document.getElementById('seller-not-auth').style.display='block';}
+  else if(currentUserData?.isVerifiedSeller){document.getElementById('seller-is-seller').style.display='block';}
+  else{
+    try{
+      const snap=await getDoc(doc(db,"sellerApplications",currentUser.uid));
+      if(snap.exists()){
+        const a=snap.data();document.getElementById('seller-already-applied').style.display='block';
+        const icon=document.getElementById('app-status-icon'),title=document.getElementById('app-status-title'),msg=document.getElementById('app-status-msg');
+        if(a.status==='pending'){icon.textContent='⏳';title.textContent='Application Under Review';msg.textContent='We\'ll notify you within 2-3 business days.';}
+        else if(a.status==='rejected'){icon.textContent='❌';title.textContent='Application Rejected';msg.textContent='Reason: '+(a.rejectionReason||'Did not meet requirements.');}
+        else if(a.status==='approved'){icon.textContent='✅';title.textContent='Application Approved!';msg.textContent='Congratulations! You are now a verified seller.';}
+      }else{document.getElementById('seller-form').style.display='block';}
+    }catch(e){document.getElementById('seller-form').style.display='block';}
+  }
+  modal.classList.add('open');
+};
+window.closeSellerModal=function(){document.getElementById('seller-modal').classList.remove('open');};
+
+window.submitSellerApp=async function(){
+  if(!currentUser){showToast('Please sign in first.','error');return;}
+  const btn=document.getElementById('seller-submit-btn'),errEl=document.getElementById('seller-error');
+  errEl.classList.remove('show');
+  const formData={businessName:document.getElementById('seller-business-name').value.trim(),businessType:document.getElementById('seller-business-type').value,phone:document.getElementById('seller-phone').value.trim(),address:document.getElementById('seller-address').value.trim(),bankName:document.getElementById('seller-bank-name').value.trim(),bankAccount:document.getElementById('seller-bank-account').value.trim()};
+  if(!formData.businessName||!formData.businessType||!formData.phone||!formData.address){showErr(errEl,'Please fill in all required fields.');return;}
+  btn.innerHTML='<div class="loading-spinner"></div> Submitting…';btn.disabled=true;
+  try{
+    let idCardURL='';
+    const idFile=document.getElementById('seller-id-card').files[0];
+    if(idFile){const sr=ref(storage,`seller-docs/${currentUser.uid}/id-${Date.now()}`);const sn=await uploadBytes(sr,idFile);idCardURL=await getDownloadURL(sn.ref);}
+    await setDoc(doc(db,"sellerApplications",currentUser.uid),{userId:currentUser.uid,...formData,idCardImage:idCardURL,status:"pending",submittedAt:serverTimestamp(),reviewedAt:null,reviewedBy:null,rejectionReason:""});
+    closeSellerModal();showToast('Application submitted! We\'ll review it within 2-3 days. ✅','success');
+  }catch(e){console.error(e);showErr(errEl,'Failed to submit. Please try again.');}
+  finally{btn.innerHTML='🚀 Submit Application';btn.disabled=false;}
+};
+
+async function loadProducts(cat=null){
+  try{
+    const constraints=[where("status","==","active"),orderBy("createdAt","desc"),limit(50)];
+    if(cat)constraints.unshift(where("category","==",cat));
+    const snap=await getDocs(query(collection(db,"products"),...constraints));
+    return snap.docs.map(d=>({id:d.id,...d.data()}));
+  }catch(e){console.error(e);return[];}
+}
+
+function renderProductCard(p){
+  const disc=p.originalPrice?Math.round((1-p.price/p.originalPrice)*100):0;
+  const badge=disc>0?`<div class="prod-badge">-${disc}%</div>`:(p.isNew?`<div class="prod-badge new-badge">NEW</div>`:'');
+  const imgHTML=p.images&&p.images.length>0?`<img src="${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">`:`<span style="font-size:3rem">${{Electronics:'💻',Fashion:'👗',Home:'🏠',Beauty:'💄',Sports:'⚽',Books:'📚',Gaming:'🎮',Toys:'🧸'}[p.category]||'📦'}</span>`;
+  const verBadge=p.sellerVerified?`<span class="verified-badge">✓ Verified</span>`:'';
+  const origPrice=p.originalPrice?`<span class="orig">$${p.originalPrice.toFixed(2)}</span>`:'';
+  return `<div class="prod-card" onclick="viewProduct('${p.id}')">
+    <div class="prod-img">${badge}<button class="prod-wish" onclick="toggleWish(event,'${p.id}')">♡</button>${imgHTML}</div>
+    <div class="prod-body">
+      <div class="prod-cat">${p.category||'General'}</div>
+      <div class="prod-name">${esc(p.name)}</div>
+      <div class="prod-seller">by ${esc(p.sellerName||'Seller')} ${verBadge}</div>
+      <div class="prod-stars">★★★★☆ <span>(${p.reviewCount||0})</span></div>
+      <div class="prod-bottom">
+        <div class="prod-price">$${Number(p.price).toFixed(2)}${origPrice}</div>
+        <button class="prod-cart-btn" onclick="addToCart(event,'${p.id}','${esc(p.name)}',${p.price})">🛒</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+window.viewProduct=async function(id){
+  showPage('product');
+  const container=document.getElementById('product-detail-content');
+  container.innerHTML='<div class="page-loader"><div class="loading-spinner"></div></div>';
+  try{
+    const snap=await getDoc(doc(db,"products",id));
+    if(!snap.exists()){container.innerHTML='<div class="empty-state"><span class="es-icon">😕</span><h3>Product not found</h3></div>';return;}
+    const p={id:snap.id,...snap.data()};
+    const disc=p.originalPrice?Math.round((1-p.price/p.originalPrice)*100):0;
+    const mainImg=p.images&&p.images.length>0?`<img src="${p.images[0]}" alt="${p.name}">`:`<span style="font-size:6rem">📦</span>`;
+    const thumbs=(p.images||[]).map((img,i)=>`<div class="pd-thumb ${i===0?'active':''}" onclick="switchPdImage('${img}',this)"><img src="${img}" alt=""></div>`).join('');
+    container.innerHTML=`
+      <span class="pd-back" onclick="showPage('shop')">← Back to Shop</span>
+      <div class="pd-grid">
+        <div>
+          <div class="pd-main-img" id="pd-main-img">${mainImg}</div>
+          <div class="pd-thumbnails">${thumbs}</div>
+        </div>
+        <div class="pd-info">
+          <div class="pd-cat-tag">${p.category||'General'}</div>
+          <h1 class="pd-title">${esc(p.name)}</h1>
+          <div class="pd-seller-row"><span>Sold by <strong>${esc(p.sellerName||'Seller')}</strong></span>${p.sellerVerified?'<span class="verified-badge">✓ Verified</span>':''}</div>
+          <div class="pd-price-row">
+            <span class="pd-price">$${Number(p.price).toFixed(2)}</span>
+            ${p.originalPrice?`<span class="pd-orig">$${p.originalPrice.toFixed(2)}</span>`:''}
+            ${disc>0?`<span class="pd-discount">-${disc}%</span>`:''}
+          </div>
+          <p class="pd-desc">${esc(p.description||'')}</p>
+          <div class="pd-qty">
+            <span class="qty-label">Qty:</span>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(-1)">−</button>
+              <span class="qty-val" id="qty-val">1</span>
+              <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+            <span style="font-size:0.78rem;color:var(--muted)">${p.stock||0} in stock</span>
+          </div>
+          <div class="pd-actions">
+            <button class="btn btn-accent" onclick="addToCart(event,'${p.id}','${esc(p.name)}',${p.price},true)">🛒 Add to Cart</button>
+            <button class="btn btn-outline" onclick="toggleWish(event,'${p.id}')">♡ Wishlist</button>
+          </div>
+        </div>
+      </div>`;
+  }catch(e){container.innerHTML='<div class="empty-state"><span class="es-icon">⚠️</span><h3>Error loading product</h3></div>';}
+};
+window.switchPdImage=function(url,el){document.getElementById('pd-main-img').innerHTML=`<img src="${url}" alt="">`;document.querySelectorAll('.pd-thumb').forEach(t=>t.classList.remove('active'));el.classList.add('active');};
+let qtyVal=1;
+window.changeQty=function(d){qtyVal=Math.max(1,qtyVal+d);document.getElementById('qty-val').textContent=qtyVal;};
+window.previewProductImages=function(input){
+  const grid=document.getElementById('image-preview-grid');grid.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(file=>{const r=new FileReader();r.onload=e=>{const img=document.createElement('img');img.src=e.target.result;img.className='img-preview';grid.appendChild(img);};r.readAsDataURL(file);});
+};
+window.submitProduct=async function(){
+  if(!currentUser||!currentUserData?.isVerifiedSeller){showToast('Only verified sellers can list products.','error');return;}
+  const btn=document.getElementById('submit-prod-btn');
+  const name=document.getElementById('prod-name').value.trim(),category=document.getElementById('prod-category').value,price=document.getElementById('prod-price').value,desc=document.getElementById('prod-desc').value.trim(),stock=document.getElementById('prod-stock').value;
+  if(!name||!category||!price||!desc||!stock){showToast('Please fill in all required fields.','error');return;}
+  btn.innerHTML='<div class="loading-spinner"></div> Uploading…';btn.disabled=true;
+  try{
+    const imageFiles=Array.from(document.getElementById('prod-images').files).slice(0,5);
+    const imageURLs=[];
+    for(const file of imageFiles){const sr=ref(storage,`products/${currentUser.uid}/${Date.now()}-${file.name}`);const sn=await uploadBytes(sr,file);imageURLs.push(await getDownloadURL(sn.ref));}
+    await addDoc(collection(db,"products"),{name,category,price:parseFloat(price),originalPrice:parseFloat(document.getElementById('prod-orig-price').value)||null,description:desc,images:imageURLs,sellerId:currentUser.uid,sellerName:currentUserData.name,sellerVerified:true,stock:parseInt(stock),rating:0,reviewCount:0,createdAt:serverTimestamp(),status:"active"});
+    showToast('Product listed successfully! 🎉','success');
+    ['prod-name','prod-desc','prod-price','prod-orig-price','prod-stock'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('prod-category').value='';document.getElementById('image-preview-grid').innerHTML='';
+    showPage('dashboard');loadDashboard();
+  }catch(e){console.error(e);showToast('Failed to upload. Check permissions.','error');}
+  finally{btn.innerHTML='📦 List Product';btn.disabled=false;}
+};
+
+async function loadDashboard(){
+  if(!currentUser)return;
+  try{
+    const snap=await getDocs(query(collection(db,"products"),where("sellerId","==",currentUser.uid)));
+    const products=snap.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('stat-products').textContent=products.length;
+    document.getElementById('stat-sales').textContent='0';document.getElementById('stat-revenue').textContent='$0';document.getElementById('stat-rating').textContent='5.0 ★';
+    const tableEl=document.getElementById('my-products-table');
+    if(products.length===0){tableEl.innerHTML='<div class="empty-state" style="padding:40px 0"><span class="es-icon">📦</span><h3>No products yet</h3><p>Add your first product!</p></div>';return;}
+    tableEl.innerHTML=`<table class="prod-table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${products.map(p=>`<tr>
+        <td style="display:flex;align-items:center;gap:10px"><div class="prod-thumb">${p.images&&p.images[0]?`<img src="${p.images[0]}" style="width:36px;height:36px;object-fit:cover;border-radius:6px">`:'📦'}</div><span>${esc(p.name)}</span></td>
+        <td>${p.category||'—'}</td><td>$${Number(p.price).toFixed(2)}</td><td>${p.stock||0}</td>
+        <td><span class="status-badge status-active">${p.status||'active'}</span></td>
+        <td><button class="btn btn-danger" style="padding:5px 10px;font-size:0.68rem" onclick="deleteProductUI('${p.id}')">Delete</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  }catch(e){console.error(e);}
+}
+
+window.deleteProductUI=async function(id){
+  if(!confirm('Delete this product?'))return;
+  try{await deleteDoc(doc(db,"products",id));showToast('Product deleted.','info');loadDashboard();}
+  catch(e){showToast('Failed to delete.','error');}
+};
+
+async function loadAdminApplications(){
+  const container=document.getElementById('applications-list');
+  try{
+    const snap=await getDocs(collection(db,"sellerApplications"));
+    const apps=snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(apps.length===0){container.innerHTML='<div class="empty-state"><span class="es-icon">📋</span><h3>No applications yet</h3></div>';return;}
+    container.innerHTML=apps.map(a=>`
+      <div class="application-card">
+        <div class="app-info">
+          <h3>${esc(a.businessName||'—')}</h3>
+          <div class="app-meta"><span>🏢 ${esc(a.businessType||'—')}</span><span>📞 ${esc(a.phone||'—')}</span><span>📍 ${esc(a.address||'—')}</span></div>
+          <div class="app-meta"><span>🏦 ${esc(a.bankName||'—')}</span><span><span class="status-badge status-${a.status}">${a.status}</span></span></div>
+          ${a.idCardImage?`<img src="${a.idCardImage}" class="app-id-card" onclick="window.open('${a.idCardImage}')">`:'<span style="font-size:0.75rem;color:var(--muted)">No ID uploaded</span>'}
+        </div>
+        <div class="app-actions">
+          ${a.status==='pending'?`
+            <button class="btn btn-success" style="font-size:0.72rem;padding:7px 14px" onclick="approveApp('${a.id}')">✅ Approve</button>
+            <button class="btn btn-danger" style="font-size:0.72rem;padding:7px 14px" onclick="showRejectInput('${a.id}')">❌ Reject</button>
+            <textarea class="reject-reason" id="reject-reason-${a.id}" placeholder="Rejection reason…"></textarea>
+            <button class="btn btn-outline" style="font-size:0.7rem;padding:6px 12px;display:none" id="reject-confirm-${a.id}" onclick="rejectApp('${a.id}')">Confirm Reject</button>
+          `:'<span style="font-size:0.78rem;color:var(--muted)">Reviewed</span>'}
+        </div>
+      </div>`).join('');
+  }catch(e){container.innerHTML=`<div class="empty-state"><span class="es-icon">⚠️</span><h3>${e.message}</h3></div>`;}
+}
+
+window.showRejectInput=function(id){document.getElementById('reject-reason-'+id).classList.add('show');document.getElementById('reject-confirm-'+id).style.display='flex';};
+window.approveApp=async function(userId){
+  if(currentUserData?.role!=='admin'){showToast('Admin access required.','error');return;}
+  try{
+    await updateDoc(doc(db,"sellerApplications",userId),{status:"approved",reviewedAt:serverTimestamp(),reviewedBy:currentUser.uid});
+    await updateDoc(doc(db,"users",userId),{role:"seller",isVerifiedSeller:true,sellerSince:serverTimestamp()});
+    showToast('Seller approved! ✅','success');loadAdminApplications();
+  }catch(e){showToast('Error: '+e.message,'error');}
+};
+window.rejectApp=async function(userId){
+  if(currentUserData?.role!=='admin'){showToast('Admin access required.','error');return;}
+  const reason=document.getElementById('reject-reason-'+userId).value.trim();
+  try{
+    await updateDoc(doc(db,"sellerApplications",userId),{status:"rejected",reviewedAt:serverTimestamp(),reviewedBy:currentUser.uid,rejectionReason:reason||"Application did not meet requirements."});
+    showToast('Application rejected.','info');loadAdminApplications();
+  }catch(e){showToast('Error: '+e.message,'error');}
+};
+
+async function loadAdminUsers(){
+  const container=document.getElementById('users-list');
+  try{
+    const snap=await getDocs(collection(db,"users"));
+    const users=snap.docs.map(d=>({id:d.id,...d.data()}));
+    container.innerHTML=`<table class="prod-table" style="width:100%"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Verified Seller</th><th>Joined</th></tr></thead><tbody>
+      ${users.map(u=>`<tr><td>${esc(u.name||'—')}</td><td style="font-size:0.78rem;color:var(--muted)">${esc(u.email||'—')}</td><td><span style="font-size:0.65rem;padding:2px 6px;border-radius:3px;background:rgba(138,138,154,0.2);color:var(--muted);font-family:'Syne',sans-serif;font-weight:700">${u.role||'customer'}</span></td><td>${u.isVerifiedSeller?'<span class="verified-badge">✓ Yes</span>':'<span style="color:var(--muted);font-size:0.75rem">No</span>'}</td><td style="font-size:0.75rem;color:var(--muted)">${u.createdAt?.toDate?.()?.toLocaleDateString?.()??'—'}</td></tr>`).join('')}
+    </tbody></table>`;
+  }catch(e){container.innerHTML=`<div class="empty-state"><span class="es-icon">⚠️</span><h3>${e.message}</h3></div>`;}
+}
+
+async function loadAdminProducts(){
+  const container=document.getElementById('admin-products-list');
+  try{
+    const snap=await getDocs(collection(db,"products"));
+    const products=snap.docs.map(d=>({id:d.id,...d.data()}));
+    container.innerHTML=`<table class="prod-table" style="width:100%"><thead><tr><th>Product</th><th>Seller</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${products.map(p=>`<tr><td>${esc(p.name)}</td><td style="font-size:0.78rem;color:var(--muted)">${esc(p.sellerName||'—')}</td><td>${p.category||'—'}</td><td>$${Number(p.price).toFixed(2)}</td><td><span class="status-badge status-${p.status||'active'}">${p.status||'active'}</span></td><td><button class="btn btn-danger" style="padding:5px 10px;font-size:0.68rem" onclick="adminDeleteProduct('${p.id}')">Delete</button></td></tr>`).join('')}
+    </tbody></table>`;
+  }catch(e){container.innerHTML=`<div class="empty-state"><span class="es-icon">⚠️</span><h3>${e.message}</h3></div>`;}
+}
+window.adminDeleteProduct=async function(id){if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,"products",id));showToast('Deleted.','info');loadAdminProducts();}catch(e){showToast('Error: '+e.message,'error');}};
+
+async function loadShopPage(){
+  const grid=document.getElementById('shop-products-grid');
+  grid.innerHTML='<div class="page-loader"><div class="loading-spinner"></div></div>';
+  try{const products=await loadProducts(shopCurrentCategory);shopProducts=[...products];renderShopGrid(sortProducts(products,shopCurrentSort));}
+  catch(e){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><span class="es-icon">⚠️</span><h3>Failed to load</h3></div>';}
+}
+function renderShopGrid(products){
+  const grid=document.getElementById('shop-products-grid');
+  if(products.length===0){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><span class="es-icon">🔍</span><h3>No products found</h3><p>Try a different category.</p></div>';return;}
+  grid.innerHTML=products.map(renderProductCard).join('');
+}
+window.setShopFilter=function(cat,btn){shopCurrentCategory=cat;document.querySelectorAll('#shop-filters .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadShopPage();};
+window.sortShopProducts=function(val){shopCurrentSort=val;renderShopGrid(sortProducts(shopProducts,val));};
+function sortProducts(arr,sort){const s=[...arr];if(sort==='price-asc')s.sort((a,b)=>a.price-b.price);else if(sort==='price-desc')s.sort((a,b)=>b.price-a.price);else if(sort==='rating')s.sort((a,b)=>(b.rating||0)-(a.rating||0));return s;}
+
+async function loadHomeProducts(){
+  const grid=document.getElementById('home-products-grid');
+  try{const products=await loadProducts(null);allProducts=products;if(products.length===0){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><span class="es-icon">🛍️</span><h3>No products yet</h3><p>Be the first to list a product!</p></div>';return;}grid.innerHTML=products.slice(0,8).map(renderProductCard).join('');}
+  catch(e){grid.innerHTML='';}
+}
+window.filterCategory=function(cat){shopCurrentCategory=cat;document.querySelectorAll('#shop-filters .filter-btn').forEach(b=>b.classList.toggle('active',b.textContent===cat));showPage('shop');loadShopPage();};
+
+async function loadSellersPage(){
+  const container=document.getElementById('sellers-list');
+  try{
+    const snap=await getDocs(query(collection(db,"users"),where("isVerifiedSeller","==",true)));
+    const sellers=snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(sellers.length===0){container.innerHTML='<div class="empty-state"><span class="es-icon">🏪</span><h3>No verified sellers yet</h3><p>Be the first!</p><br><button class="btn btn-accent" onclick="openSellerModal()">Apply Now</button></div>';return;}
+    container.innerHTML=`<div class="products-grid">${sellers.map(s=>`<div class="prod-card" style="cursor:default"><div class="prod-img" style="font-size:3rem;background:var(--surface2)">${(s.name||'S')[0].toUpperCase()}</div><div class="prod-body"><div class="prod-cat">Verified Seller</div><div class="prod-name">${esc(s.name||'Seller')}</div><div class="prod-seller"><span class="verified-badge">✓ Verified</span></div><div style="font-size:0.75rem;color:var(--muted);margin-top:8px">Member since ${s.sellerSince?.toDate?.()?.toLocaleDateString?.()??'Recently'}</div></div></div>`).join('')}</div>`;
+  }catch(e){container.innerHTML=`<div class="empty-state"><span class="es-icon">⚠️</span><h3>${e.message}</h3></div>`;}
+}
+
+function updateCartBadge(){const count=cartItems.reduce((s,i)=>s+i.qty,0);['cart-badge','bottom-cart-badge'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=count;});}
+window.addToCart=function(e,id,name,price){e.stopPropagation();const ex=cartItems.find(i=>i.id===id);if(ex)ex.qty++;else cartItems.push({id,name,price,qty:1});localStorage.setItem('gm_cart',JSON.stringify(cartItems));updateCartBadge();showToast(`${name} added to cart 🛒`,'success');};
+window.showCart=function(){if(cartItems.length===0){showToast('Your cart is empty!','info');return;}const total=cartItems.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);alert(`Cart (${cartItems.length} items)\n${cartItems.map(i=>`${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}`).join('\n')}\n\nTotal: $${total}`);};
+window.toggleWish=function(e,id){e.stopPropagation();if(!currentUser){showToast('Sign in to save to wishlist.','info');return;}showToast('Added to wishlist ❤️','success');};
+window.handleSearch=function(e){if(e.key==='Enter'){const q=e.target.value.trim().toLowerCase();if(!q)return;showPage('shop');const filtered=allProducts.filter(p=>p.name.toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q)||(p.category||'').toLowerCase().includes(q));renderShopGrid(filtered);}};
+
+window.showPage=function(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const page=document.getElementById('page-'+name);
+  if(page)page.classList.add('active');
+  window.scrollTo(0,0);
+  if(name==='home')loadHomeProducts();
+  else if(name==='shop')loadShopPage();
+  else if(name==='sellers')loadSellersPage();
+  else if(name==='dashboard'){if(!currentUser||!currentUserData?.isVerifiedSeller){showToast('Seller access required.','error');showPage('home');return;}loadDashboard();}
+  else if(name==='add-product'){if(!currentUser||!currentUserData?.isVerifiedSeller){showToast('Seller access required.','error');showPage('home');return;}}
+  else if(name==='admin'){if(!currentUser||currentUserData?.role!=='admin'){showToast('Admin access required.','error');showPage('home');return;}loadAdminApplications();}
+  else if(name==='profile'){if(!currentUser){openAuthModal();return;}}
+  const navMap={home:0,shop:1,sellers:2};
+  if(navMap[name]!==undefined)document.querySelectorAll('.nav-link')[navMap[name]]?.classList.add('active');
+  document.querySelectorAll('.bottom-nav-item').forEach((el,i)=>el.classList.toggle('active',i===(navMap[name]??-1)));
+};
+window.switchAdminTab=function(tab,btn){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');document.getElementById('admin-'+tab).classList.add('active');
+  if(tab==='users')loadAdminUsers();else if(tab==='products')loadAdminProducts();else loadAdminApplications();
+};
+
+window.openAuthModal=function(){document.getElementById('auth-modal').classList.add('open');};
+window.closeAuthModal=function(){document.getElementById('auth-modal').classList.remove('open');};
+window.switchAuthTab=function(tab){
+  document.querySelectorAll('.modal-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.getElementById('login-form').classList.toggle('active',tab==='login');
+  document.getElementById('register-form').classList.toggle('active',tab==='register');
+};
+window.toggleMobileNav=function(){document.getElementById('mobile-nav').classList.toggle('open');};
+window.toggleTheme=function(){const html=document.documentElement;const isDark=!html.getAttribute('data-theme');html.setAttribute('data-theme',isDark?'light':'');document.querySelector('.theme-toggle').textContent=isDark?'☀️':'🌙';};
+
+function showErr(el,msg){el.textContent=msg;el.classList.add('show');}
+window.showToast=function(msg,type='info'){
+  const container=document.getElementById('toast-container');
+  const icons={success:'✅',error:'❌',info:'ℹ️',warning:'⚠️'};
+  const toast=document.createElement('div');toast.className=`toast toast-${type}`;
+  toast.innerHTML=`<span class="toast-icon">${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  container.appendChild(toast);
+  setTimeout(()=>{toast.classList.add('removing');setTimeout(()=>toast.remove(),300);},3500);
+};
+function esc(str){return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('open');});});
+
+updateCartBadge();
+loadHomeProducts();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD70wcXxNNRqW8a-4t1kY70lMfRWeGnAfE",
+  authDomain: "globamart-389aa.firebaseapp.com",
+  projectId: "globamart-389aa",
+  storageBucket: "globamart-389aa.firebasestorage.app",
+  messagingSenderId: "231548981743",
+  appId: "1:231548981743:web:54c0aca72902b15ce3261a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.signUp = async function () {
+  const email = document.getElementById("signup-email").value;
+  const password = document.getElementById("signup-password").value;
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Account created successfully!");
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+window.login = async function () {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login successful!");
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+window.logout = async function () {
+  await signOut(auth);
+  alert("Logged out!");
+};
+
+onAuthStateChanged(auth, (user) => {
+  const authBtn = document.getElementById("nav-auth-btn");
+
+  if (user) {
+    authBtn.innerHTML = "Logout";
+    authBtn.onclick = logout;
+  } else {
+    authBtn.innerHTML = "Login";
+    authBtn.onclick = () => {
+      document.querySelector(".modal-overlay").classList.add("open");
+    };
+  }
+});
+</script>
+</body>
+</html>
